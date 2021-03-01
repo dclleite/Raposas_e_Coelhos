@@ -1,3 +1,5 @@
+package raposaecoelho;
+
 import java.util.List;
 import java.util.Iterator;
 import java.util.Random;
@@ -13,29 +15,29 @@ public class Fox
 {
     // Characteristics shared by all foxes (static fields).
     
-    // The age at which a fox can start to breed.
+    // The age at which a fox can start to breed. //A idade em que uma raposa pode começar a procriar.
     private static final int BREEDING_AGE = 10;
-    // The age to which a fox can live.
+    // The age to which a fox can live. A idade até a qual uma raposa pode viver.
     private static final int MAX_AGE = 150;
-    // The likelihood of a fox breeding.
+    // The likelihood of a fox breeding. A probabilidade de uma criação de raposas.
     private static final double BREEDING_PROBABILITY = 0.09;
-    // The maximum number of births.
+    // The maximum number of births. O número máximo de nascimentos.
     private static final int MAX_LITTER_SIZE = 3;
-    // The food value of a single rabbit. In effect, this is the
-    // number of steps a fox can go before it has to eat again.
+    // The food value of a single rabbit. In effect, this is the // O valor alimentar de um único coelho. Na verdade, este é o
+    // number of steps a fox can go before it has to eat again.     // número de passos que uma raposa pode dar antes de comer novamente.    
     private static final int RABBIT_FOOD_VALUE = 4;
-    // A shared random number generator to control breeding.
+    // A shared random number generator to control breeding. // Um ​​gerador de números aleatórios compartilhado para controlar a reprodução.
     private static final Random rand = new Random();
     
     // Individual characteristics (instance fields).
 
-    // The fox's age.
+    // The fox's age. A idade da raposa.
     private int age;
-    // Whether the fox is alive or not.
+    // Whether the fox is alive or not. Se a raposa está viva ou não. 
     private boolean alive;
-    // The fox's position
+    // The fox's position // A posição da raposa
     private Location location;
-    // The fox's food level, which is increased by eating rabbits.
+    // The fox's food level, which is increased by eating rabbits. // O nível de comida da raposa, que é aumentado comendo coelhos.
     private int foodLevel;
 
     /**
@@ -53,7 +55,7 @@ public class Fox
             foodLevel = rand.nextInt(RABBIT_FOOD_VALUE);
         }
         else {
-            // leave age at 0
+            // leave age at 0 idade em 0
             foodLevel = RABBIT_FOOD_VALUE;
         }
     }
@@ -63,6 +65,13 @@ public class Fox
      * rabbits. In the process, it might breed, die of hunger,
      * or die of old age.
      */
+    
+     /**
+    * Isso é o que a raposa faz na maioria das vezes: ela caça
+     * coelhos. No processo, ele pode se reproduzir, morrer de fome,
+     * ou morrer de velhice.
+    */
+    
     public void hunt(Field currentField, Field updatedField, List newFoxes)
     {
         incrementAge();

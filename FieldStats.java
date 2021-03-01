@@ -1,3 +1,5 @@
+package raposaecoelho;
+
 import java.awt.Color;
 import java.util.HashMap;
 import java.util.Iterator;

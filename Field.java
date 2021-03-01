@@ -1,3 +1,5 @@
+package raposaecoelho;
+
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -189,4 +191,16 @@ public class Field
     {
         return width;
     }
+    
+    
+    
+    //começando implementação do campo
+    //Limpando o campo passando a linha e coluna para nulo
+    public void clear(Location location)
+    {
+        field[location.getRow()][location.getCol()] = null;
+    }
+    
+    
+    
 }
