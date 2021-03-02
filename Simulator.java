@@ -11,37 +11,44 @@ import java.awt.Color;
  * A simple predator-prey simulator, based on a field containing
  * rabbits and foxes.
  * 
+ * Um simulador de presa-predador simples, baseado em um campo contendo
+ * coelhos e raposas. 
+ * 
  * @author David J. Barnes and Michael Kolling
  * @version 2002-04-09
  */
 public class Simulator
 {
-    // The private static final variables represent 
-    // configuration information for the simulation.
-    // The default width for the grid.
+    // The private static final variables represent // As variáveis finais estáticas privadas representam
+    // configuration information for the simulation. // informações de configuração para a simulação.
+    // The default width for the grid. // A largura padrão da grade. 
     private static final int DEFAULT_WIDTH = 50;
-    // The default depth of the grid.
+    // The default depth of the grid. // A profundidade padrão da grade. 
     private static final int DEFAULT_DEPTH = 50;
-    // The probability that a fox will be created in any given grid position.
+    // The probability that a fox will be created in any given grid position. 
+    // A probabilidade de que uma raposa seja criada em qualquer posição da grade. 
     private static final double FOX_CREATION_PROBABILITY = 0.02;
     // The probability that a rabbit will be created in any given grid position.
+    // A probabilidade de que um coelho seja criado em qualquer posição da grade. 
     private static final double RABBIT_CREATION_PROBABILITY = 0.08;    
 
-    // The list of animals in the field
+    // The list of animals in the field // A lista de animais no campo 
     private List animals;
-    // The list of animals just born
+    // The list of animals just born // A lista de animais recém-nascidos 
     private List newAnimals;
-    // The current state of the field.
+    // The current state of the field. // O estado atual do campo. 
     private Field field;
-    // A second field, used to build the next stage of the simulation.
+    // A second field, used to build the next stage of the simulation. 
+    // Um segundo campo, usado para construir o próximo estágio da simulação. 
     private Field updatedField;
-    // The current step of the simulation.
+    // The current step of the simulation. // A etapa atual da simulação. 
     private int step;
-    // A graphical view of the simulation.
+    // A graphical view of the simulation. // Uma visão gráfica da simulação. 
     private SimulatorView view;
     
     /**
      * Construct a simulation field with default size.
+     * Construa um campo de simulação com tamanho padrão. 
      */
     public Simulator()
     {
@@ -52,6 +59,10 @@ public class Simulator
      * Create a simulation field with the given size.
      * @param depth Depth of the field. Must be greater than zero.
      * @param width Width of the field. Must be greater than zero.
+     * 
+     * Crie um campo de simulação com o tamanho determinado.
+     * @param depth Profundidade do campo. Deve ser maior que zero.
+     * @param width Largura do campo. Deve ser maior que zero. 
      */
     public Simulator(int depth, int width)
     {
@@ -67,17 +78,22 @@ public class Simulator
         updatedField = new Field(depth, width);
 
         // Create a view of the state of each location in the field.
+        // Configure um ponto de partida válido. 
         view = new SimulatorView(depth, width);
         view.setColor(Fox.class, Color.blue);
         view.setColor(Rabbit.class, Color.orange);
         
         // Setup a valid starting point.
+        // Configure um ponto de partida válido. 
         reset();
     }
     
     /**
      * Run the simulation from its current state for a reasonably long period,
      * e.g. 500 steps.
+     * 
+     * Execute a simulação de seu estado atual por um período razoavelmente longo,
+     * por exemplo. 500 passos. 
      */
     public void runLongSimulation()
     {
@@ -87,6 +103,9 @@ public class Simulator
     /**
      * Run the simulation from its current state for the given number of steps.
      * Stop before the given number of steps if it ceases to be viable.
+     * 
+     * Execute a simulação de seu estado atual para um determinado número de etapas.
+     * Pare antes de um determinado número de etapas se ele deixar de ser viável. 
      */
     public void simulate(int numSteps)
     {
@@ -99,6 +118,10 @@ public class Simulator
      * Run the simulation from its current state for a single step.
      * Iterate over the whole field updating the state of each
      * fox and rabbit.
+     * 
+     * Execute a simulação de seu estado atual para uma única etapa.
+     * Repita em todo o campo atualizando o estado de cada
+     * raposa e coelho. 
      */
     public void simulateOneStep()
     {
@@ -106,6 +129,7 @@ public class Simulator
         newAnimals.clear();
         
         // let all animals act
+        // deixe todos os animais agirem 
         for(Iterator iter = animals.iterator(); iter.hasNext(); ) {
             Object animal = iter.next();
             if(animal instanceof Rabbit) {
@@ -114,7 +138,7 @@ public class Simulator
                     rabbit.run(updatedField, newAnimals);
                 }
                 else {
-                    iter.remove();   // remove dead rabbits from collection
+                    iter.remove();   // remove dead rabbits from collection. // remova coelhos mortos da coleção 
                 }
             }
             else if(animal instanceof Fox) {
@@ -123,7 +147,7 @@ public class Simulator
                     fox.hunt(field, updatedField, newAnimals);
                 }
                 else {
-                    iter.remove();   // remove dead foxes from collection
+                    iter.remove();   // remove dead foxes from collection. // remova raposas mortas da coleção 
                 }
             }
             else {
@@ -131,20 +155,24 @@ public class Simulator
             }
         }
         // add new born animals to the list of animals
+        // adicionar animais recém-nascidos à lista de animais 
         animals.addAll(newAnimals);
         
         // Swap the field and updatedField at the end of the step.
+        // Troque o campo e updatedField no final da etapa. 
         Field temp = field;
         field = updatedField;
         updatedField = temp;
         updatedField.clear();
 
         // display the new field on screen
+        // exibir o novo campo na tela 
         view.showStatus(step, field);
     }
         
     /**
      * Reset the simulation to a starting position.
+     * Redefina a simulação para uma posição inicial.
      */
     public void reset()
     {
@@ -155,11 +183,13 @@ public class Simulator
         populate(field);
         
         // Show the starting state in the view.
+        // Mostra o estado inicial na vista. 
         view.showStatus(step, field);
     }
     
     /**
      * Populate the field with foxes and rabbits.
+     * Povoe o campo com raposas e coelhos. 
      */
     private void populate(Field field)
     {
@@ -180,6 +210,7 @@ public class Simulator
                     field.place(rabbit, row, col);
                 }
                 // else leave the location empty.
+                // caso contrário, deixe o local vazio. 
             }
         }
         Collections.shuffle(animals);
