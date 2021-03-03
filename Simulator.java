@@ -27,10 +27,17 @@ public class Simulator
     private static final int DEFAULT_DEPTH = 50;
     // The probability that a fox will be created in any given grid position. 
     // A probabilidade de que uma raposa seja criada em qualquer posição da grade. 
-    private static final double FOX_CREATION_PROBABILITY = 0.02;
+    private static final double FOX_CREATION_PROBABILITY = 0.03;
     // The probability that a rabbit will be created in any given grid position.
     // A probabilidade de que um coelho seja criado em qualquer posição da grade. 
     private static final double RABBIT_CREATION_PROBABILITY = 0.08;    
+    
+    
+    //Inclusão do animal predador Lobo
+    private static final double LOBE_CREATION_PROBABILITY = 0.01; //A probabilidade de que um lobo seja criada em qualquer posição da grade. 
+    
+    
+    
 
     // The list of animals in the field // A lista de animais no campo 
     private List animals;
@@ -82,6 +89,8 @@ public class Simulator
         view = new SimulatorView(depth, width);
         view.setColor(Fox.class, Color.blue);
         view.setColor(Rabbit.class, Color.orange);
+        
+        view.setColor(Lobe.class, Color.green);
         
         // Setup a valid starting point.
         // Configure um ponto de partida válido. 
@@ -150,6 +159,15 @@ public class Simulator
                     iter.remove();   // remove dead foxes from collection. // remova raposas mortas da coleção 
                 }
             }
+            else if(animal instanceof Lobe) {
+                Lobe lobe = (Lobe)animal;
+                if(lobe.isAlive()) {
+                    lobe.hunt(field, updatedField, newAnimals);
+                }
+                else {
+                    iter.remove();   // remove dead lobe from collection. // remova lobos mortos da coleção 
+                }
+            }
             else {
                 System.out.println("found unknown animal");
             }
@@ -188,8 +206,8 @@ public class Simulator
     }
     
     /**
-     * Populate the field with foxes and rabbits.
-     * Povoe o campo com raposas e coelhos. 
+     * Populate the field with foxes and rabbits (and lobe).
+     * Povoe o campo com raposas , coelhos e lobos. 
      */
     private void populate(Field field)
     {
@@ -209,6 +227,14 @@ public class Simulator
                     rabbit.setLocation(row, col);
                     field.place(rabbit, row, col);
                 }
+                //
+                else if(rand.nextDouble() <= LOBE_CREATION_PROBABILITY) {
+                    Lobe lobe = new Lobe(true);
+                    animals.add(lobe);
+                    lobe.setLocation(row, col);
+                    field.place(lobe, row, col);
+                }
+                
                 // else leave the location empty.
                 // caso contrário, deixe o local vazio. 
             }

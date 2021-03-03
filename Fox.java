@@ -19,7 +19,7 @@ public class Fox
     // Characteristics shared by all foxes (static fields).
     
     // The age at which a fox can start to breed. // A idade em que uma raposa pode começar a procriar.
-    private static final int BREEDING_AGE = 10;
+    private static final int BREEDING_AGE = 8;
     // The age to which a fox can live. // A idade até a qual uma raposa pode viver.
     private static final int MAX_AGE = 150;
     // The likelihood of a fox breeding.//  A probabilidade de uma criação de raposas.
@@ -230,5 +230,12 @@ public class Fox
     public void setLocation(Location location)
     {
         this.location = location;
+    }
+    
+    
+    //A raposa está morta agora
+    public void setEaten()
+    {
+        alive = false;
     }
 }
