@@ -1,4 +1,4 @@
-package raposaecoelho;
+//package raposaecoelho;
 
 import java.util.Iterator;
 import java.util.List;
@@ -214,5 +214,13 @@ public class Lobe {
     public void setLocation(Location location)
     {
         this.location = location;
+    }
+    
+    public String getPredadores(){
+      return "Ninguém";
+    }
+
+    public String getPresas(){
+      return "Raposa e coelho";
     }
 }

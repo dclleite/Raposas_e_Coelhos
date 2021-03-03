@@ -1,4 +1,4 @@
-package raposaecoelho;
+//package raposaecoelho;
 
 import java.util.List;
 import java.util.Random;
@@ -184,5 +184,13 @@ public class Rabbit
     public void setLocation(Location location)
     {
         this.location = location;
+    }
+
+    public String getPredadores(){
+      return "Raposa e lobo";
+    }
+
+    public String getPresas(){
+      return "Ninguém";
     }
 }

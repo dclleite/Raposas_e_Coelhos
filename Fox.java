@@ -1,4 +1,4 @@
-package raposaecoelho;
+//package raposaecoelho;
 
 import java.util.List;
 import java.util.Iterator;
@@ -237,5 +237,13 @@ public class Fox
     public void setEaten()
     {
         alive = false;
+    }
+
+    public String getPredadores(){
+      return "Lobo";
+    }
+
+    public String getPresas(){
+      return "Coelho";
     }
 }
