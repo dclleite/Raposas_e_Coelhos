@@ -20,12 +20,12 @@ public class Fox {
     // The age to which a fox can live. // A idade até a qual uma raposa pode viver.
     private static final int MAX_AGE = 150;
     // The likelihood of a fox breeding.//  A probabilidade de uma criação de raposas.
-    private static final double BREEDING_PROBABILITY = 0.09;
+    private  double BREEDING_PROBABILITY = 0.09;
     // The maximum number of births. O número máximo de nascimentos.
     private static final int MAX_LITTER_SIZE = 3;
     // The food value of a single rabbit. In effect, this is the // O valor alimentar de um único coelho. Na verdade, este é o
     // number of steps a fox can go before it has to eat again.     // número de passos que uma raposa pode dar antes de comer novamente.
-    private static final int RABBIT_FOOD_VALUE = 4;
+    private int RABBIT_FOOD_VALUE = 4;
     // A shared random number generator to control breeding. // Um ​​gerador de números aleatórios compartilhado para controlar a reprodução.
     private static final Random rand = new Random();
 
@@ -225,5 +225,21 @@ public class Fox {
 
     public String getPresas() {
         return "Coelho";
+    }
+
+    public double getBreed(){
+      return this.BREEDING_PROBABILITY;
+    }
+
+    public void setBreed(double novo){
+      this.BREEDING_PROBABILITY = novo;
+    }
+
+    public int getFood(){
+      return this.RABBIT_FOOD_VALUE;
+    }
+
+    public void setFood(int novo){
+      this.RABBIT_FOOD_VALUE = novo;
     }
 }

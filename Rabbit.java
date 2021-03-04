@@ -20,7 +20,7 @@ public class Rabbit {
     // The age to which a rabbit can live. // Até qual idade que um coelho pode viver. 
     private static final int MAX_AGE = 50;
     // The likelihood of a rabbit breeding. // A probabilidade de uma criação de coelhos. 
-    private static final double BREEDING_PROBABILITY = 0.15;
+    private double BREEDING_PROBABILITY = 0.15;
     // The maximum number of births. // O número máximo de nascimentos. 
     private static final int MAX_LITTER_SIZE = 5;
     // A shared random number generator to control breeding.
@@ -174,5 +174,13 @@ public class Rabbit {
 
     public String getPresas() {
         return "Ninguém";
+    }
+
+    public double getBreed(){
+      return this.BREEDING_PROBABILITY;
+    }
+
+    public void setBreed(double novo){
+      this.BREEDING_PROBABILITY = novo;
     }
 }

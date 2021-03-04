@@ -12,12 +12,12 @@ public class Lobe {
     // A idade até um lobo pode viver.
     private static final int MAX_AGE = 100;
     //  A probabilidade de uma criação de lobos.
-    private static final double BREEDING_PROBABILITY = 0.03;
+    private double BREEDING_PROBABILITY = 0.03;
     //  número máximo de nascimentos.
     private static final int MAX_LITTER_SIZE = 3;
 
     // número de passos que lobo pode dar antes de comer novamente.    
-    private static final int RABBIT_OR_FOX_FOOD_VALUE = 4;
+    private int RABBIT_OR_FOX_FOOD_VALUE = 4;
 
     // A shared random number generator to control breeding. // Um ​​gerador de números aleatórios compartilhado para controlar a reprodução.
     private static final Random rand = new Random();
@@ -198,5 +198,21 @@ public class Lobe {
 
     public String getPresas() {
         return "Raposa e coelho";
+    }
+    
+    public double getBreed(){
+      return this.BREEDING_PROBABILITY;
+    }
+
+    public void setBreed(double novo){
+      this.BREEDING_PROBABILITY = novo;
+    }
+
+    public int getFood(){
+      return this.RABBIT_OR_FOX_FOOD_VALUE;
+    }
+
+    public void setFood(int novo){
+      this.RABBIT_OR_FOX_FOOD_VALUE = novo;
     }
 }

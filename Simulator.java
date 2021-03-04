@@ -134,13 +134,24 @@ public class Simulator {
             Object animal = iter.next();
             if (animal instanceof Rabbit) {
                 Rabbit rabbit = (Rabbit) animal;
+                double breed = rabbit.getBreed();
+                Estacao inv = new Estacao();
+                breed = inv.getNovoBreed(breed);
+                rabbit.setBreed(breed);
                 if (rabbit.isAlive()) {
                     rabbit.run(updatedField, newAnimals);
                 } else {
                     iter.remove();   // remove dead rabbits from collection. // remova coelhos mortos da coleção 
                 }
             } else if (animal instanceof Fox) {
-                Fox fox = (Fox) animal;
+                  Fox fox = (Fox) animal;
+                  double breed = fox.getBreed();
+                  Estacao inv = new Estacao();
+                  breed = inv.getNovoBreed(breed);
+                  fox.setBreed(breed);
+                  int food = fox.getFood();
+                  food = inv.getNovoFood(food);
+                  fox.setFood(food); 
                 if (fox.isAlive()) {
                     fox.hunt(field, updatedField, newAnimals);
                 } else {
@@ -148,6 +159,13 @@ public class Simulator {
                 }
             } else if (animal instanceof Lobe) {
                 Lobe lobe = (Lobe) animal;
+                double breed = lobe.getBreed();
+                Estacao inv = new Estacao();
+                breed = inv.getNovoBreed(breed);
+                lobe.setBreed(breed);
+                int food = lobe.getFood();
+                food = inv.getNovoFood(food);
+                lobe.setFood(food);
                 if (lobe.isAlive()) {
                     lobe.hunt(field, updatedField, newAnimals);
                 } else {
