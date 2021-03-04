@@ -10,5 +10,5 @@ max_line_length = 120
 tab_width = 4
 
 [{*.java,Cafe,main/Main.java}]
-indent_size = 2
-tab_width = 2
+indent_size = 4
+tab_width = 4
