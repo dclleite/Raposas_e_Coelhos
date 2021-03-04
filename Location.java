@@ -1,5 +1,3 @@
-package raposaecoelho;
-
 /**
  * Represent a location in a rectangular grid.
  * Represente um local em uma grade retangular. 

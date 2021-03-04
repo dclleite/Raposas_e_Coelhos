@@ -1,5 +1,3 @@
-package raposaecoelho;
-
 import java.awt.Color;
 
 /**
