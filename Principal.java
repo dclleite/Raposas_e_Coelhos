@@ -1,12 +1,7 @@
 /**
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- * <p>
  * Para alterar este cabeçalho de licença, escolha Cabeçalhos de licença em Propriedades do projeto.
  * Para alterar este arquivo de modelo, escolha Ferramentas | Modelos
  * e abra o modelo no editor.
- * /
  */
 
 import java.util.Scanner;
@@ -90,7 +85,7 @@ public class Principal {
     }
 
     /**
-     * @param args the command line arguments
+     * @param args os argumentos da linha de comando 
      */
     public static void main(String[] args) {
         // TODO code application logic here

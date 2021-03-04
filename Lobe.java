@@ -2,9 +2,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 
-/**
- * @author samir
- */
 public class Lobe {
 
     // A idade em que um lobo pode começar a procriar.
@@ -19,7 +16,7 @@ public class Lobe {
     // número de passos que lobo pode dar antes de comer novamente.    
     private int RABBIT_OR_FOX_FOOD_VALUE = 4;
 
-    // A shared random number generator to control breeding. // Um ​​gerador de números aleatórios compartilhado para controlar a reprodução.
+    // Um ​​gerador de números aleatórios compartilhado para controlar a reprodução.
     private static final Random rand = new Random();
 
     // Individual characteristics (instance fields).
@@ -46,14 +43,12 @@ public class Lobe {
             age = rand.nextInt(MAX_AGE);
             foodLevel = rand.nextInt(RABBIT_OR_FOX_FOOD_VALUE);
         } else {
-            // leave age at 0
             // idade em 0
             foodLevel = RABBIT_OR_FOX_FOOD_VALUE;
         }
     }
 
     /**
-     * /**
      * Isso é o que o lobo faz na maioria das vezes: ela caça
      * coelhos ou raposas. No processo, ele pode se reproduzir, morrer de fome,
      * ou morrer de velhice.
@@ -141,11 +136,10 @@ public class Lobe {
     }
 
     /**
-     * Generate a number representing the number of births,
-     * if it can breed.
+     * Gere um número que representa o número de nascimentos,
+     * se pode procriar. 
      *
      * @return O número de nascimentos (pode ser zero).
-     * /
      */
     private int breed() {
         int births = 0;
@@ -166,7 +160,6 @@ public class Lobe {
      * Verifique se o lobo está vivo ou não.
      *
      * @return Verdadeiro se a raposa ainda estiver viva.
-     * /
      */
     public boolean isAlive() {
         return alive;
@@ -186,7 +179,6 @@ public class Lobe {
      * Defina a localização do lobo.
      *
      * @param location A localização da raposa.
-     *                 /
      */
     public void setLocation(Location location) {
         this.location = location;

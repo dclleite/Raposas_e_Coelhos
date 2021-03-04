@@ -1,24 +1,24 @@
 import java.awt.Color;
 
 /**
- * Provide a counter for a participant in the simulation.
- * This includes an identifying string and a count of how
- * many participants of this type currently exist within
- * the simulation.
+ * Fornece um contador para um participante da simulação.
+ * Isso inclui uma sequência de identificação e uma contagem de como
+ * muitos participantes deste tipo existem atualmente em
+ * a simulação. 
  *
  * @author David J. Barnes and Michael Kolling
  * @version 2002-04-23
  */
 public class Counter {
-    // A name for this type of simulation participant
+    // Um nome para este tipo de participante de simulação 
     private String name;
-    // How many of this type exist in the simulation.
+    // Quantos desse tipo existem na simulação. 
     private int count;
 
     /**
-     * Provide a name for one of the simulation types.
+     * Forneça um nome para um dos tipos de simulação.
      *
-     * @param name A name, e.g. "Fox".
+     * @param name Um nome, por exemplo "Raposa". 
      */
     public Counter(String name) {
         this.name = name;
@@ -26,28 +26,28 @@ public class Counter {
     }
 
     /**
-     * @return The short description of this type.
+     * @return A breve descrição desse tipo. 
      */
     public String getName() {
         return name;
     }
 
     /**
-     * @return The current count for this type.
+     * @return A contagem atual para este tipo. 
      */
     public int getCount() {
         return count;
     }
 
     /**
-     * Increment the current count by one.
+     * Aumente a contagem atual em um. 
      */
     public void increment() {
         count++;
     }
 
     /**
-     * Reset the current count to zero.
+     * Redefina a contagem atual para zero.
      */
     public void reset() {
         count = 0;

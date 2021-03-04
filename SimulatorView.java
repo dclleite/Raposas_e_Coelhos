@@ -4,26 +4,20 @@ import javax.swing.*;
 import java.util.HashMap;
 
 /**
- * A graphical view of the simulation grid.
- * The view displays a colored rectangle for each location
- * representing its contents. It uses a default background color.
- * Colors for each type of species can be defined using the
- * setColor method.
- * <p>
- * Uma visão gráfica da grade de simulação.
- * A visualização exibe um retângulo colorido para cada local
- * representando seu conteúdo. Ele usa uma cor de fundo padrão.
- * As cores para cada tipo de espécie podem ser definidas usando o
+ * Uma visão gráfica da classe de simulação.
+ * A visualização mostra um retângulo colorido para cada local
+ * representado seu conteúdo. Ele usa uma cor de fundo padrão.
+ * Conforme núcleos para cada tipo de espécie podem ser definidas com base no
  * Método setColor.
  *
- * @author David J. Barnes and Michael Kolling
- * @version 2002-04-23
+ * @author David J. Barnes e Michael Kolling
+ * @version 2002-04-23 
  */
 public class SimulatorView extends JFrame {
-    // Colors used for empty locations. // Cores usadas para locais vazios. 
+    // Cores usadas para locais vazios. 
     private static final Color EMPTY_COLOR = Color.white;
 
-    // Color used for objects that have no defined color. // Cor usada para objetos que não têm cor definida. 
+    // Cor usada para objetos que não têm cor definida. 
     private static final Color UNKNOWN_COLOR = Color.gray;
 
     private final String STEP_PREFIX = "Step: ";
@@ -31,16 +25,12 @@ public class SimulatorView extends JFrame {
     private JLabel stepLabel, population;
     private FieldView fieldView;
 
-    // A map for storing colors for participants in the simulation 
     // Um mapa para armazenar cores para os participantes da simulação 
     private HashMap colors;
-    // A statistics object computing and storing simulation information
     // Um objeto de estatística computando e armazenando informações de simulação 
     private FieldStats stats;
 
     /**
-     * Create a view of the given width and height.
-     * <p>
      * Crie uma visualização da largura e altura fornecidas.
      */
     public SimulatorView(int height, int width) {
@@ -64,8 +54,6 @@ public class SimulatorView extends JFrame {
     }
 
     /**
-     * Define a color to be used for a given class of animal.
-     * <p>
      * Defina uma cor a ser usada para uma determinada classe de animal.
      */
     public void setColor(Class animalClass, Color color) {
@@ -73,12 +61,12 @@ public class SimulatorView extends JFrame {
     }
 
     /**
-     * Define a color to be used for a given class of animal.
+     * Defina uma cor a ser usada para uma determinada classe de animal.
      */
     private Color getColor(Class animalClass) {
         Color col = (Color) colors.get(animalClass);
         if (col == null) {
-            // no color defined for this class. // nenhuma cor definida para esta classe 
+            // nenhuma cor definida para esta classe 
             return UNKNOWN_COLOR;
         } else {
             return col;
@@ -86,15 +74,10 @@ public class SimulatorView extends JFrame {
     }
 
     /**
-     * Show the current status of the field.
-     *
-     * @param step  Which iteration step it is.
-     * @param stats Status of the field to be represented.
-     *              <p>
-     *              Mostra o status atual do campo.
+     * Mostra o status atual do campo.
      * @param step  Qual etapa de iteração é.
      * @param stats Status do campo a ser representado.
-     *              /
+     *
      */
     public void showStatus(int step, Field field) {
         if (!isVisible())
@@ -123,22 +106,15 @@ public class SimulatorView extends JFrame {
     }
 
     /**
-     * Determine whether the simulation should continue to run.
+     * Determine se a simulação deve continuar em execução.
      *
-     * @return true Se houver mais de uma espécie viva.
+     * @return true Se houver mais de uma espécie viva. 
      */
     public boolean isViable(Field field) {
         return stats.isViable(field);
     }
 
     /**
-     * Provide a graphical view of a rectangular field. This is
-     * a nested class (a class defined inside a class) which
-     * defines a custom component for the user interface. This
-     * component displays the field.
-     * This is rather advanced GUI stuff - you can ignore this
-     * for your project if you like.
-     * <p>
      * Fornece uma visualização gráfica de um campo retangular. Isto é
      * uma classe aninhada (uma classe definida dentro de uma classe) que
      * define um componente personalizado para a interface do usuário. Esta
@@ -156,8 +132,7 @@ public class SimulatorView extends JFrame {
         private Image fieldImage;
 
         /**
-         * Create a new FieldView component.
-         * Crie um novo componente FieldView.
+         * Crie um novo componente FieldView. 
          */
         public FieldView(int height, int width) {
             gridHeight = height;
@@ -166,7 +141,6 @@ public class SimulatorView extends JFrame {
         }
 
         /**
-         * Tell the GUI manager how big we would like to be.
          * Diga ao gerenciador de GUI o quão grande gostaríamos de ser.
          */
         public Dimension getPreferredSize() {
@@ -175,9 +149,6 @@ public class SimulatorView extends JFrame {
         }
 
         /**
-         * Prepare for a new round of painting. Since the component
-         * may be resized, compute the scaling factor again.
-         * <p>
          * Prepare-se para uma nova rodada de pintura. Já que o componente
          * pode ser redimensionado, calcule o fator de escala novamente.
          */
@@ -199,7 +170,6 @@ public class SimulatorView extends JFrame {
         }
 
         /**
-         * Paint on grid location on this field in a given color.
          * Pinte no local da grade neste campo em uma determinada cor.
          */
         public void drawMark(int x, int y, Color color) {
@@ -208,9 +178,6 @@ public class SimulatorView extends JFrame {
         }
 
         /**
-         * The field view component needs to be redisplayed. Copy the
-         * internal image to screen.
-         * <p>
          * O componente de visualização de campo precisa ser exibido novamente. Copie o
          * imagem interna na tela.
          */
