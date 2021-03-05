@@ -53,7 +53,7 @@ public class Lobe extends Animal {
      *
      * @param newFoxes Uma lista para adicionar raposas recém-nascidas.
      */
-    public void act(List<Animal> newFoxes) {
+    public void act(List<Animal> newWolves) {
         incrementAge();
         incrementHunger();
         if (isAlive()) {
@@ -167,27 +167,11 @@ public class Lobe extends Animal {
         return age >= BREEDING_AGE;
     }
 
-    public String getPredadores() {
-        return "Ninguém";
+    public static String getPredadores() {
+        return "Nenhum";
     }
 
-    public String getPresas() {
+    public static String getPresas() {
         return "Raposa e coelho";
-    }
-
-    public double getBreed() {
-        return this.BREEDING_PROBABILITY;
-    }
-
-    public void setBreed(double novo) {
-        this.BREEDING_PROBABILITY = novo;
-    }
-
-    public int getFood() {
-        return this.RABBIT_OR_FOX_FOOD_VALUE;
-    }
-
-    public void setFood(int novo) {
-        this.RABBIT_OR_FOX_FOOD_VALUE = novo;
     }
 }

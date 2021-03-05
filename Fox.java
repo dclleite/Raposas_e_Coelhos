@@ -168,27 +168,11 @@ public class Fox extends Animal {
         return age >= BREEDING_AGE;
     }
 
-    public String getPredadores() {
+    public  static String getPredadores() {
         return "Lobo";
     }
 
-    public String getPresas() {
+    public  static String getPresas() {
         return "Coelho";
-    }
-
-    public double getBreed() {
-        return this.BREEDING_PROBABILITY;
-    }
-
-    public void setBreed(double novo) {
-        this.BREEDING_PROBABILITY = novo;
-    }
-
-    public int getFood() {
-        return this.RABBIT_FOOD_VALUE;
-    }
-
-    public void setFood(int novo) {
-        this.RABBIT_FOOD_VALUE = novo;
     }
 }
