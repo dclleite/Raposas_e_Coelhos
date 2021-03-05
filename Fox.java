@@ -67,7 +67,7 @@ public class Fox extends Animal {
             giveBirth(newFoxes);
             // Move towards a source of food if found.
             Location location = getLocation();
-            Location newLocation = findFood(location);
+            Location newLocation = findFood();
             if (newLocation == null) {
                 // No food found - try to move to a free location.
                 newLocation = getField().freeAdjacentLocation(location);
@@ -106,16 +106,15 @@ public class Fox extends Animal {
      * Tell the fox to look for rabbits adjacent to its current location.
      * Only the first live rabbit is eaten.
      *
-     * @param location Where in the field it is located.
      * @return Where food was found, or null if it wasn't.
      */
-    private Location findFood(Location location) {
+    private Location findFood() {
         Field field = getField();
         List<Location> adjacent = field.adjacentLocations(getLocation());
         Iterator<Location> it = adjacent.iterator();
         while (it.hasNext()) {
             Location where = it.next();
-            Object animal = field.getObjectAt(where);
+            Animal animal = field.getObjectAt(where);
             if (animal instanceof Rabbit) {
                 Rabbit rabbit = (Rabbit) animal;
                 if (rabbit.isAlive()) {

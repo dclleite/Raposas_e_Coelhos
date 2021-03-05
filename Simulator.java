@@ -63,6 +63,7 @@ public class Simulator {
         view = new SimulatorView(depth, width);
         view.setColor(Rabbit.class, Color.green);
         view.setColor(Fox.class, Color.red);
+        view.setColor(Lobe.class, Color.blue);
 
         // Setup a valid starting point.
         reset();
@@ -128,19 +129,20 @@ public class Simulator {
         field.clear();
         for (int row = 0; row < field.getDepth(); row++) {
             for (int col = 0; col < field.getWidth(); col++) {
+                Location location = new Location(row, col);
+                Animal animal;
                 if (rand.nextDouble() <= FOX_CREATION_PROBABILITY) {
-                    Location location = new Location(row, col);
-                    Fox fox = new Fox(true, field, location);
-                    animals.add(fox);
+                    animal = new Fox(true, field, location);
+                    animals.add(animal);
+                    field.place(animal, location);
                 } else if (rand.nextDouble() <= RABBIT_CREATION_PROBABILITY) {
-                    Location location = new Location(row, col);
-                    Rabbit rabbit = new Rabbit(true, field, location);
-                    animals.add(rabbit);
+                    animal = new Rabbit(true, field, location);
+                    animals.add(animal);
+                    field.place(animal, location);
                 } else if (rand.nextDouble() <= LOBE_CREATION_PROBABILITY) {
-//                    Lobe lobe = new Lobe(true);
-//                    animals.add(lobe);
-//                    lobe.setLocation(row, col);
-//                    field.place(lobe, row, col);
+                    animal = new Lobe(true, field, location);
+                    animals.add(animal);
+                    field.place(animal, location);
                 }
             }
         }

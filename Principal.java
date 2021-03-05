@@ -85,7 +85,7 @@ public class Principal {
     }
 
     /**
-     * @param args os argumentos da linha de comando 
+     * @param args os argumentos da linha de comando
      */
     public static void main(String[] args) {
         // TODO code application logic here
@@ -98,6 +98,6 @@ public class Principal {
             menu();
             opcao = entrada.nextInt();
             executarOpcao(opcao);
-        }while(opcao != 5);
+        } while (opcao != 5);
     }
 }

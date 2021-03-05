@@ -3,7 +3,7 @@
  * Represente um local em uma grau retangular.
  *
  * @author David J. Barnes e Michael Kolling
- * @version 09-04-2002 
+ * @version 09-04-2002
  */
 public class Location {
     // Posições de linha e coluna
@@ -13,8 +13,8 @@ public class Location {
     /**
      * Representam a linha e a coluna.
      *
-     * @param fileira A linha.
-     * @param Coluna A coluna.
+     * @param row A linha.
+     * @param col A coluna.
      */
     public Location(int row, int col) {
         this.row = row;
@@ -36,7 +36,7 @@ public class Location {
     /**
      * Retorna uma string da linha, coluna do formulário
      *
-     * @return Uma representação de string do local. 
+     * @return Uma representação de string do local.
      */
     public String toString() {
         return row + "," + col;

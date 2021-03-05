@@ -2,7 +2,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 
-public class Lobe extends Animal{
+public class Lobe extends Animal {
 
     // A idade em que um lobo pode começar a procriar.
     private static final int BREEDING_AGE = 5;
@@ -27,102 +27,98 @@ public class Lobe extends Animal{
     private int foodLevel;
 
     /**
-     * Crie um lobo. Um lobo pode ser criado como um recém-nascido (idade zero
+     * Crie uma raposa. Uma raposa pode ser criada como um recém-nascido (idade zero
      * e sem fome) ou com idade aleatória.
      *
-     * @param randomAge Se verdadeiro, o lobo terá idade e nível de fome aleatórios.
+     * @param randomAge If true, the fox will have random age and hunger level.
+     * @param field     The field currently occupied.
+     * @param location  The location within the field.
      */
-    public Lobe(boolean randomAge) {
+    public Lobe(boolean randomAge, Field field, Location location) {
+        super(field, location);
         age = 0;
-        alive = true;
         if (randomAge) {
             age = rand.nextInt(MAX_AGE);
             foodLevel = rand.nextInt(RABBIT_OR_FOX_FOOD_VALUE);
         } else {
-            // idade em 0
+            age = 0;
             foodLevel = RABBIT_OR_FOX_FOOD_VALUE;
         }
     }
 
     /**
-     * Isso é o que o lobo faz na maioria das vezes: ela caça
-     * coelhos ou raposas. No processo, ele pode se reproduzir, morrer de fome,
-     * ou morrer de velhice.
+     * This is what the fox does most of the time: it hunts for
+     * rabbits. In the process, it might breed, die of hunger,
+     * or die of old age.
+     *
+     * @param newFoxes A list to add newly born foxes to.
      */
-
-    public void hunt(Field currentField, Field updatedField, List newLobes) {
+    public void act(List<Animal> newFoxes) {
         incrementAge();
         incrementHunger();
         if (isAlive()) {
-            // Novos Lobos nascem em locais adjacentes. 
-            int births = breed();
-            for (int b = 0; b < births; b++) {
-                Lobe newLobe = new Lobe(false);
-                newLobes.add(newLobe);
-                Location loc = updatedField.randomAdjacentLocation(location);
-                newLobe.setLocation(loc);
-                updatedField.place(newLobe, loc);
+            giveBirth(newFoxes);
+            // Move towards a source of food if found.
+            Location location = getLocation();
+            Location newLocation = findFood();
+            if (newLocation == null) {
+                // No food found - try to move to a free location.
+                newLocation = getField().freeAdjacentLocation(location);
             }
-            // Mova-se em direção à fonte de alimento, se encontrada. 
-            Location newLocation = findFood(currentField, location);
-            if (newLocation == null) {  // no food found - move randomly // nenhum alimento encontrado - mova-se aleatoriamente
-                newLocation = updatedField.freeAdjacentLocation(location);
-            }
+            // See if it was possible to move.
             if (newLocation != null) {
                 setLocation(newLocation);
-                updatedField.place(this, newLocation);
             } else {
-
-                // não pode se mover nem ficar - superlotação - todos os locais tomados
-                alive = false;
+                // Overcrowding.
+                setDead();
             }
         }
     }
 
     /**
-     * Aumente a idade. Isso pode resultar na morte do lobo.
+     * Increase the age. This could result in the fox's death.
      */
     private void incrementAge() {
         age++;
         if (age > MAX_AGE) {
-            alive = false;
+            setDead();
         }
     }
 
     /**
-     * Deixe o lobo com mais fome. Isso pode resultar na morte do lobo.
+     * Make this fox more hungry. This could result in the fox's death.
      */
     private void incrementHunger() {
         foodLevel--;
         if (foodLevel <= 0) {
-            alive = false;
+            setDead();
         }
     }
 
     /**
-     * Diga à raposa para procurar coelhos ou raposas próximos à sua localização atual.
+     * Tell the fox to look for rabbits adjacent to its current location.
+     * Only the first live rabbit is eaten.
      *
-     * @param field    O campo no qual ele deve olhar.
-     * @param location Onde no campo ele está localizado.
-     * @return Onde a comida foi encontrada, ou null se não for.
+     * @return Where food was found, or null if it wasn't.
      */
-    private Location findFood(Field field, Location location) {
-        Iterator adjacentLocations =
-            field.adjacentLocations(location);
-        while (adjacentLocations.hasNext()) {
-            Location where = (Location) adjacentLocations.next();
-            Object animal = field.getObjectAt(where);
+    private Location findFood() {
+        Field field = getField();
+        List<Location> adjacent = field.adjacentLocations(getLocation());
+        Iterator<Location> it = adjacent.iterator();
+        while (it.hasNext()) {
+            Location where = it.next();
+            Animal animal = field.getObjectAt(where);
             if (animal instanceof Rabbit) {
                 Rabbit rabbit = (Rabbit) animal;
                 if (rabbit.isAlive()) {
-                    rabbit.setEaten();
+                    rabbit.setDead();
                     foodLevel = RABBIT_OR_FOX_FOOD_VALUE;
                     return where;
                 }
             } else if (animal instanceof Fox) {
                 Fox fox = (Fox) animal;
                 if (fox.isAlive()) {
-                    fox.setEaten();
+                    fox.setDead();
                     foodLevel = RABBIT_OR_FOX_FOOD_VALUE;
                     return where;
                 }
@@ -132,10 +128,29 @@ public class Lobe extends Animal{
     }
 
     /**
-     * Gere um número que representa o número de nascimentos,
-     * se pode procriar. 
+     * Check whether or not this fox is to give birth at this step.
+     * New births will be made into free adjacent locations.
      *
-     * @return O número de nascimentos (pode ser zero).
+     * @param newWolves A list to add newly born foxes to.
+     */
+    private void giveBirth(List<Animal> newWolves) {
+        // New foxes are born into adjacent locations.
+        // Get a list of adjacent free locations.
+        Field field = getField();
+        List<Location> free = field.getFreeAdjacentLocations(getLocation());
+        int births = breed();
+        for (int b = 0; b < births && free.size() > 0; b++) {
+            Location loc = free.remove(0);
+            Fox young = new Fox(false, field, loc);
+            newWolves.add(young);
+        }
+    }
+
+    /**
+     * Generate a number representing the number of births,
+     * if it can breed.
+     *
+     * @return The number of births (may be zero).
      */
     private int breed() {
         int births = 0;
@@ -146,38 +161,10 @@ public class Lobe extends Animal{
     }
 
     /**
-     * Lobo pode procriar se atingiu a idade reprodutiva.
+     * A fox can breed if it has reached the breeding age.
      */
     private boolean canBreed() {
         return age >= BREEDING_AGE;
-    }
-
-    /**
-     * Verifique se o lobo está vivo ou não.
-     *
-     * @return Verdadeiro se a raposa ainda estiver viva.
-     */
-    public boolean isAlive() {
-        return alive;
-    }
-
-    /**
-     * Defina a localização do animal.
-     *
-     * @param row A coordenada vertical do local.
-     * @param col A coordenada horizontal do local.
-     */
-    public void setLocation(int row, int col) {
-        this.location = new Location(row, col);
-    }
-
-    /**
-     * Defina a localização do lobo.
-     *
-     * @param location A localização da raposa.
-     */
-    public void setLocation(Location location) {
-        this.location = location;
     }
 
     public String getPredadores() {
@@ -187,20 +174,20 @@ public class Lobe extends Animal{
     public String getPresas() {
         return "Raposa e coelho";
     }
-    
-    public double getBreed(){
-      return this.BREEDING_PROBABILITY;
+
+    public double getBreed() {
+        return this.BREEDING_PROBABILITY;
     }
 
-    public void setBreed(double novo){
-      this.BREEDING_PROBABILITY = novo;
+    public void setBreed(double novo) {
+        this.BREEDING_PROBABILITY = novo;
     }
 
-    public int getFood(){
-      return this.RABBIT_OR_FOX_FOOD_VALUE;
+    public int getFood() {
+        return this.RABBIT_OR_FOX_FOOD_VALUE;
     }
 
-    public void setFood(int novo){
-      this.RABBIT_OR_FOX_FOOD_VALUE = novo;
+    public void setFood(int novo) {
+        this.RABBIT_OR_FOX_FOOD_VALUE = novo;
     }
 }

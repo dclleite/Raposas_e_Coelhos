@@ -13,7 +13,7 @@ public class Field {
     // A profundidade e largura do campo.
     private int depth, width;
     // Armazenamento para os animais.
-    private Object[][] field;
+    private Animal[][] field;
 
     /**
      * Representa um campo das dimensões fornecidas.
@@ -24,7 +24,7 @@ public class Field {
     public Field(int depth, int width) {
         this.depth = depth;
         this.width = width;
-        field = new Object[depth][width];
+        field = new Animal[depth][width];
     }
 
     /**
@@ -56,7 +56,7 @@ public class Field {
      * @param row    Coordenada de linha do local.
      * @param col    Coordenada da coluna do local.
      */
-    public void place(Object animal, int row, int col) {
+    public void place(Animal animal, int row, int col) {
         place(animal, new Location(row, col));
     }
 
@@ -68,7 +68,7 @@ public class Field {
      * @param animal   O animal a ser colocado.
      * @param location Onde colocar o animal.
      */
-    public void place(Object animal, Location location) {
+    public void place(Animal animal, Location location) {
         field[location.getRow()][location.getCol()] = animal;
     }
 
@@ -78,7 +78,7 @@ public class Field {
      * @param location Onde no campo.
      * @return O animal no local fornecido ou null se não houver nenhum.
      */
-    public Object getObjectAt(Location location) {
+    public Animal getObjectAt(Location location) {
         return getObjectAt(location.getRow(), location.getCol());
     }
 
@@ -89,7 +89,7 @@ public class Field {
      * @param col A coluna desejada.
      * @return O animal no local fornecido ou null se não houver nenhum.
      */
-    public Object getObjectAt(int row, int col) {
+    public Animal getObjectAt(int row, int col) {
         return field[row][col];
     }
 

@@ -11,7 +11,7 @@ import java.util.HashMap;
  * Método setColor.
  *
  * @author David J. Barnes e Michael Kolling
- * @version 2002-04-23 
+ * @version 2002-04-23
  */
 public class SimulatorView extends JFrame {
     // Cores usadas para locais vazios. 
@@ -74,10 +74,10 @@ public class SimulatorView extends JFrame {
     }
 
     /**
-     * Mostra o status atual do campo.
-     * @param step  Qual etapa de iteração é.
-     * @param stats Status do campo a ser representado.
+     * Show the current status of the field.
      *
+     * @param step  Which iteration step it is.
+     * @param field The field whose status is to be displayed.
      */
     public void showStatus(int step, Field field) {
         if (!isVisible())
@@ -90,7 +90,7 @@ public class SimulatorView extends JFrame {
 
         for (int row = 0; row < field.getDepth(); row++) {
             for (int col = 0; col < field.getWidth(); col++) {
-                Object animal = field.getObjectAt(row, col);
+                Animal animal = field.getObjectAt(row, col);
                 if (animal != null) {
                     stats.incrementCount(animal.getClass());
                     fieldView.drawMark(col, row, getColor(animal.getClass()));
@@ -108,7 +108,7 @@ public class SimulatorView extends JFrame {
     /**
      * Determine se a simulação deve continuar em execução.
      *
-     * @return true Se houver mais de uma espécie viva. 
+     * @return true Se houver mais de uma espécie viva.
      */
     public boolean isViable(Field field) {
         return stats.isViable(field);
@@ -132,7 +132,7 @@ public class SimulatorView extends JFrame {
         private Image fieldImage;
 
         /**
-         * Crie um novo componente FieldView. 
+         * Crie um novo componente FieldView.
          */
         public FieldView(int height, int width) {
             gridHeight = height;
