@@ -26,6 +26,7 @@ public class FieldStats {
     }
 
     /**
+     * @param field O campo atualmente ocupado.
      * @return Uma String que descreve quais animais estão no campo.
      */
     public String getPopulationDetails(Field field) {
@@ -58,6 +59,8 @@ public class FieldStats {
 
     /**
      * Aumente a contagem para uma classe de animal.
+     *
+     * @param animalClass
      */
     public void incrementCount(Class animalClass) {
         Counter cnt = (Counter) counters.get(animalClass);
@@ -80,6 +83,7 @@ public class FieldStats {
      * Determine se a simulação ainda é viável.
      * Ou seja, deve continuar a funcionar.
      *
+     * @param field O campo atualmente ocupado.
      * @return Verdadeiro, se houver mais de uma espécie viva.
      */
     public boolean isViable(Field field) {

@@ -79,7 +79,7 @@ public class Rabbit extends Animal {
      * Verifique se este coelho vai dar à luz ou não nesta etapa.
      * Os novos nascimentos serão feitos em locais adjacentes livres.
      *
-     * @param newRabbits Uma lista para adicionar coelhos recém-nascidos. 
+     * @param newRabbits Uma lista para adicionar coelhos recém-nascidos.
      */
     private void giveBirth(List<Animal> newRabbits) {
         // Novos coelhos nascem em locais adjacentes.
@@ -98,7 +98,7 @@ public class Rabbit extends Animal {
      * Gere um número que representa o número de nascimentos,
      * se pode procriar.
      *
-     * @return O número de nascimentos (pode ser zero). 
+     * @return O número de nascimentos (pode ser zero).
      */
     private int breed() {
         int births = 0;

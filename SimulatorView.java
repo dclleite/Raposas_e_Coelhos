@@ -32,6 +32,9 @@ public class SimulatorView extends JFrame {
 
     /**
      * Crie uma visualização da largura e altura fornecidas.
+     *
+     * @param height altura do campo
+     * @param width  largura do campo
      */
     public SimulatorView(int height, int width) {
         stats = new FieldStats();
@@ -55,6 +58,9 @@ public class SimulatorView extends JFrame {
 
     /**
      * Defina uma cor a ser usada para uma determinada classe de animal.
+     *
+     * @param animalClass
+     * @param color       cor definida para cada animal
      */
     public void setColor(Class animalClass, Color color) {
         colors.put(animalClass, color);
@@ -74,10 +80,10 @@ public class SimulatorView extends JFrame {
     }
 
     /**
-     * Show the current status of the field.
+     * Mostra o status atual do campo.
      *
-     * @param step  Which iteration step it is.
-     * @param field The field whose status is to be displayed.
+     * @param step  Qual é a etapa de iteração.
+     * @param field O campo cujo status deve ser exibido.
      */
     public void showStatus(int step, Field field) {
         if (!isVisible())
@@ -108,7 +114,8 @@ public class SimulatorView extends JFrame {
     /**
      * Determine se a simulação deve continuar em execução.
      *
-     * @return Verdadeiro, se houver mais de uma espécie viva. 
+     * @param field O campo atualmente ocupado
+     * @return Verdadeiro, se houver mais de uma espécie viva.
      */
     public boolean isViable(Field field) {
         return stats.isViable(field);

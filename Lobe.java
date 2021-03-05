@@ -49,15 +49,15 @@ public class Lobe extends Animal {
     /**
      * Isso é o que a raposa faz na maioria das vezes: ela caça por
      * coelhos. No processo, ele pode se reproduzir, morrer de fome,
-     * ou morrer de velhice. 
+     * ou morrer de velhice.
      *
-     * @param newFoxes Uma lista para adicionar raposas recém-nascidas.
+     * @param newWolves Uma lista para adicionar raposas recém-nascidas.
      */
     public void act(List<Animal> newWolves) {
         incrementAge();
         incrementHunger();
         if (isAlive()) {
-            giveBirth(newFoxes);
+            giveBirth(newWolves);
             // Mova-se em direção a uma fonte de alimento, se encontrada.
             Location location = getLocation();
             Location newLocation = findFood();
@@ -148,7 +148,7 @@ public class Lobe extends Animal {
 
     /**
      * Gere um número que representa o número de nascimentos,
-     * se pode procriar. 
+     * se pode procriar.
      *
      * @return O número de nascimentos (pode ser zero).
      */

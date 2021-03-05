@@ -28,7 +28,7 @@ public abstract class Animal {
 
 
     /**
-     * Faça este animal agir - isto é: faça-o agir 
+     * Faça este animal agir - isto é: faça-o agir
      * o que quer / precisa fazer.
      *
      * @param newAnimals Uma lista para adicionar animais recém-nascidos.
@@ -36,9 +36,9 @@ public abstract class Animal {
     abstract public void act(List<Animal> newAnimals);
 
     /**
-     * Verifique se o animal está vivo ou não. 
+     * Verifique se o animal está vivo ou não.
      *
-     * @return Verdadeiro, se o animal ainda estiver vivo. 
+     * @return Verdadeiro, se o animal ainda estiver vivo.
      */
     public boolean isAlive() {
         return alive;
@@ -47,7 +47,7 @@ public abstract class Animal {
 
     /**
      * Indique que o animal não está mais vivo.
-     * Ele é removido do campo. 
+     * Ele é removido do campo.
      */
     public void setDead() {
         alive = false;

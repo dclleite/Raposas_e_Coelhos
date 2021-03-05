@@ -41,7 +41,7 @@ public class Field {
     /**
      * Limpe o local fornecido.
      *
-     * @param location O local a ser limpo. 
+     * @param location O local a ser limpo.
      */
     public void clear(Location location) {
         field[location.getRow()][location.getCol()] = null;
@@ -97,7 +97,7 @@ public class Field {
      * Gere um local aleatório adjacente ao
      * determinado local ou é o mesmo local.
      * O local retornado estará dentro dos limites válidos
-     * do campo. 
+     * do campo.
      *
      * @param location O local a partir do qual gerar uma adjacência.
      * @return Um local válido dentro da área da grade.
@@ -131,7 +131,7 @@ public class Field {
      * do campo.
      *
      * @param location A localização a partir da qual uma adjacência deve ser gerada.
-     * @return Um local válido dentro da área da grade. 
+     * @return Um local válido dentro da área da grade.
      */
     public Location freeAdjacentLocation(Location location) {
         // Os gratuitos disponíveis. 
@@ -146,7 +146,7 @@ public class Field {
     /**
      * Retorne uma lista embaralhada de locais adjacentes ao determinado.
      * A lista não incluirá o local em si.
-     * Todos os locais ficarão dentro da grade. 
+     * Todos os locais ficarão dentro da grade.
      *
      * @param location A localização a partir da qual gerar adjacências.
      * @return Uma lista de locais adjacentes àquele fornecido.

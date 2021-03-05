@@ -80,6 +80,8 @@ public class Simulator {
     /**
      * Execute a simulação de seu estado atual para um determinado número de etapas.
      * Pare antes de um determinado número de etapas se ele deixar de ser viável.
+     *
+     * @param numSteps quantidade de passos
      */
     public void simulate(int numSteps) {
         for (int step = 1; step <= numSteps && view.isViable(field); step++) {

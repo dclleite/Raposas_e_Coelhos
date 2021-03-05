@@ -39,7 +39,7 @@ public class Fox extends Animal {
      *
      * @param randomAge Se for verdade, a raposa terá idade e nível de fome aleatórios.
      * @param field     O campo atualmente ocupado.
-     * @param location  A localização dentro do campo. 
+     * @param location  A localização dentro do campo.
      */
     public Fox(boolean randomAge, Field field, Location location) {
         super(field, location);
@@ -168,11 +168,11 @@ public class Fox extends Animal {
         return age >= BREEDING_AGE;
     }
 
-    public  static String getPredadores() {
+    public static String getPredadores() {
         return "Lobo";
     }
 
-    public  static String getPresas() {
+    public static String getPresas() {
         return "Coelho";
     }
 }
