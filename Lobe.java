@@ -2,7 +2,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 
-public class Lobe {
+public class Lobe extends Animal{
 
     // A idade em que um lobo pode começar a procriar.
     private static final int BREEDING_AGE = 5;
@@ -16,17 +16,13 @@ public class Lobe {
     // número de passos que lobo pode dar antes de comer novamente.    
     private int RABBIT_OR_FOX_FOOD_VALUE = 4;
 
-    // Um ​​gerador de números aleatórios compartilhado para controlar a reprodução.
+    // Um gerador de números aleatórios compartilhado para controlar a reprodução.
     private static final Random rand = new Random();
 
-    // Individual characteristics (instance fields).
+    // Individual characteristics (instance fields).`
 
     // A idade do lobo.
     private int age;
-    // Se o lobo está vivo ou não. 
-    private boolean alive;
-    // A posição do lobo
-    private Location location;
     // O nível de comida do lobo, que é aumentado comendo coelhos ou raposas.
     private int foodLevel;
 

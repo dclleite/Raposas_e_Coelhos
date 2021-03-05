@@ -47,29 +47,29 @@ public class Principal {
     }
 
     private static void imprimirPredadoresPresas() {
-        System.out.println("Digite o animal desejado");
-        String animal = entrada.next();
-        if (animal.equals("raposa")) {
-            Fox raposa = new Fox(true);
-            System.out.print("Predadores: ");
-            System.out.println(raposa.getPredadores());
-            System.out.print("Presas: ");
-            System.out.println(raposa.getPresas());
-        } else if (animal.equals("lobo")) {
-            Lobe lobo = new Lobe(true);
-            System.out.print("Predadores: ");
-            System.out.println(lobo.getPredadores());
-            System.out.print("Presas: ");
-            System.out.println(lobo.getPresas());
-        } else if (animal.equals("coelho")) {
-            Rabbit coelho = new Rabbit(true);
-            System.out.print("Predadores: ");
-            System.out.println(coelho.getPredadores());
-            System.out.print("Presas: ");
-            System.out.println(coelho.getPresas());
-        } else {
-            System.out.println("Animal inválido");
-        }
+//        System.out.println("Digite o animal desejado");
+//        String animal = entrada.next();
+//        if (animal.equals("raposa")) {
+//            Fox raposa = new Fox(true);
+//            System.out.print("Predadores: ");
+//            System.out.println(raposa.getPredadores());
+//            System.out.print("Presas: ");
+//            System.out.println(raposa.getPresas());
+//        } else if (animal.equals("lobo")) {
+//            Lobe lobo = new Lobe(true);
+//            System.out.print("Predadores: ");
+//            System.out.println(lobo.getPredadores());
+//            System.out.print("Presas: ");
+//            System.out.println(lobo.getPresas());
+//        } else if (animal.equals("coelho")) {
+//            Rabbit coelho = new Rabbit(true);
+//            System.out.print("Predadores: ");
+//            System.out.println(coelho.getPredadores());
+//            System.out.print("Presas: ");
+//            System.out.println(coelho.getPresas());
+//        } else {
+//            System.out.println("Animal inválido");
+//        }
     }
 
     private static void reiniciarExecucao() {

@@ -23,23 +23,16 @@ public class Simulator {
     private static final double FOX_CREATION_PROBABILITY = 0.03;
     // A probabilidade de que um coelho seja criado em qualquer posição da grade. 
     private static final double RABBIT_CREATION_PROBABILITY = 0.08;
+    //A probabilidade de que um lobo seja criada em qualquer posição da grade.
+    private static final double LOBE_CREATION_PROBABILITY = 0.01;
 
-
-    //Inclusão do animal predador Lobo
-    private static final double LOBE_CREATION_PROBABILITY = 0.01; //A probabilidade de que um lobo seja criada em qualquer posição da grade. 
-
-
-    // A lista de animais no campo 
-    private List animals;
-    // A lista de animais recém-nascidos 
-    private List newAnimals;
-    // O estado atual do campo. 
+    // List of animals in the field.
+    private List<Animal> animals;
+    // The current state of the field.
     private Field field;
-    // Um segundo campo, usado para construir o próximo estágio da simulação. 
-    private Field updatedField;
-    // A etapa atual da simulação. 
+    // The current step of the simulation.
     private int step;
-    // Uma visão gráfica da simulação. 
+    // A graphical view of the simulation.
     private SimulatorView view;
 
     /**
@@ -51,6 +44,7 @@ public class Simulator {
 
     /**
      * Crie um campo de simulação com o tamanho determinado.
+     *
      * @param depth Profundidade do campo. Deve ser maior que zero.
      * @param width Largura do campo. Deve ser maior que zero.
      */
@@ -61,19 +55,16 @@ public class Simulator {
             depth = DEFAULT_DEPTH;
             width = DEFAULT_WIDTH;
         }
-        animals = new ArrayList();
-        newAnimals = new ArrayList();
+
+        animals = new ArrayList<Animal>();
         field = new Field(depth, width);
-        updatedField = new Field(depth, width);
 
-        // Configure um ponto de partida válido. 
+        // Create a view of the state of each location in the field.
         view = new SimulatorView(depth, width);
-        view.setColor(Fox.class, Color.blue);
-        view.setColor(Rabbit.class, Color.orange);
+        view.setColor(Rabbit.class, Color.green);
+        view.setColor(Fox.class, Color.red);
 
-        view.setColor(Lobe.class, Color.green);
-
-        // Configure um ponto de partida válido. 
+        // Setup a valid starting point.
         reset();
     }
 
@@ -102,64 +93,21 @@ public class Simulator {
      */
     public void simulateOneStep() {
         step++;
-        newAnimals.clear();
 
-        // deixe todos os animais agirem 
-        for (Iterator iter = animals.iterator(); iter.hasNext(); ) {
-            Object animal = iter.next();
-            if (animal instanceof Rabbit) {
-                Rabbit rabbit = (Rabbit) animal;
-                double breed = rabbit.getBreed();
-                Estacao inv = new Estacao();
-                breed = inv.getNovoBreed(breed);
-                rabbit.setBreed(breed);
-                if (rabbit.isAlive()) {
-                    rabbit.run(updatedField, newAnimals);
-                } else {
-                    iter.remove();   // remova coelhos mortos da coleção 
-                }
-            } else if (animal instanceof Fox) {
-                  Fox fox = (Fox) animal;
-                  double breed = fox.getBreed();
-                  Estacao inv = new Estacao();
-                  breed = inv.getNovoBreed(breed);
-                  fox.setBreed(breed);
-                  int food = fox.getFood();
-                  food = inv.getNovoFood(food);
-                  fox.setFood(food); 
-                if (fox.isAlive()) {
-                    fox.hunt(field, updatedField, newAnimals);
-                } else {
-                    iter.remove();   // remova raposas mortas da coleção 
-                }
-            } else if (animal instanceof Lobe) {
-                Lobe lobe = (Lobe) animal;
-                double breed = lobe.getBreed();
-                Estacao inv = new Estacao();
-                breed = inv.getNovoBreed(breed);
-                lobe.setBreed(breed);
-                int food = lobe.getFood();
-                food = inv.getNovoFood(food);
-                lobe.setFood(food);
-                if (lobe.isAlive()) {
-                    lobe.hunt(field, updatedField, newAnimals);
-                } else {
-                    iter.remove();   // remova lobos mortos da coleção 
-                }
-            } else {
-                System.out.println("found unknown animal");
+        // Provide space for newborn animals.
+        List<Animal> newAnimals = new ArrayList<Animal>();
+        // Let all rabbits act.
+        for (Iterator<Animal> it = animals.iterator(); it.hasNext(); ) {
+            Animal animal = it.next();
+            animal.act(newAnimals);
+            if (!animal.isAlive()) {
+                it.remove();
             }
         }
-        // adicionar animais recém-nascidos à lista de animais 
+
+        // Add the newly born foxes and rabbits to the main lists.
         animals.addAll(newAnimals);
 
-        // Troque o campo e updatedField no final da etapa. 
-        Field temp = field;
-        field = updatedField;
-        updatedField = temp;
-        updatedField.clear();
-
-        // exibir o novo campo na tela 
         view.showStatus(step, field);
     }
 
@@ -169,44 +117,32 @@ public class Simulator {
     public void reset() {
         step = 0;
         animals.clear();
-        field.clear();
-        updatedField.clear();
-        populate(field);
+        populate();
 
-        // Mostra o estado inicial na vista. 
+        // Show the starting state in the view.
         view.showStatus(step, field);
     }
 
-    /**
-     * Povoe o campo com raposas , coelhos e lobos.
-     */
-    private void populate(Field field) {
+    private void populate() {
         Random rand = new Random();
         field.clear();
         for (int row = 0; row < field.getDepth(); row++) {
             for (int col = 0; col < field.getWidth(); col++) {
                 if (rand.nextDouble() <= FOX_CREATION_PROBABILITY) {
-                    Fox fox = new Fox(true);
+                    Location location = new Location(row, col);
+                    Fox fox = new Fox(true, field, location);
                     animals.add(fox);
-                    fox.setLocation(row, col);
-                    field.place(fox, row, col);
                 } else if (rand.nextDouble() <= RABBIT_CREATION_PROBABILITY) {
-                    Rabbit rabbit = new Rabbit(true);
+                    Location location = new Location(row, col);
+                    Rabbit rabbit = new Rabbit(true, field, location);
                     animals.add(rabbit);
-                    rabbit.setLocation(row, col);
-                    field.place(rabbit, row, col);
+                } else if (rand.nextDouble() <= LOBE_CREATION_PROBABILITY) {
+//                    Lobe lobe = new Lobe(true);
+//                    animals.add(lobe);
+//                    lobe.setLocation(row, col);
+//                    field.place(lobe, row, col);
                 }
-                //
-                else if (rand.nextDouble() <= LOBE_CREATION_PROBABILITY) {
-                    Lobe lobe = new Lobe(true);
-                    animals.add(lobe);
-                    lobe.setLocation(row, col);
-                    field.place(lobe, row, col);
-                }
-
-                // caso contrário, deixe o local vazio. 
             }
         }
-        Collections.shuffle(animals);
     }
 }
