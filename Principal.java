@@ -42,34 +42,34 @@ public class Principal {
     }
 
     private static void simularPassos() {
-        System.out.println("Por favor digite o número de passos: ");
+        System.out.println("Por favor digite o número de passos:(fox/rabbit/lobe) ");
         simulator.simulate(entrada.nextInt());
     }
 
     private static void imprimirPredadoresPresas() {
-//        System.out.println("Digite o animal desejado");
-//        String animal = entrada.next();
-//        if (animal.equals("raposa")) {
-//            Fox raposa = new Fox(true);
-//            System.out.print("Predadores: ");
-//            System.out.println(raposa.getPredadores());
-//            System.out.print("Presas: ");
-//            System.out.println(raposa.getPresas());
-//        } else if (animal.equals("lobo")) {
-//            Lobe lobo = new Lobe(true);
-//            System.out.print("Predadores: ");
-//            System.out.println(lobo.getPredadores());
-//            System.out.print("Presas: ");
-//            System.out.println(lobo.getPresas());
-//        } else if (animal.equals("coelho")) {
-//            Rabbit coelho = new Rabbit(true);
-//            System.out.print("Predadores: ");
-//            System.out.println(coelho.getPredadores());
-//            System.out.print("Presas: ");
-//            System.out.println(coelho.getPresas());
-//        } else {
-//            System.out.println("Animal inválido");
-//        }
+        System.out.println("Digite o animal desejado");
+        String opcaoAnimal = entrada.next();
+        String predadores = null;
+        String presas = null;
+
+        if (opcaoAnimal.equals("fox")) {
+            predadores = Fox.getPredadores();
+            presas = Fox.getPresas();
+        } else if (opcaoAnimal.equals("rabbit")) {
+            predadores = Rabbit.getPredadores();
+            presas = Rabbit.getPresas();
+        } else if (opcaoAnimal.equals("lobe")) {
+            predadores = Lobe.getPredadores();
+            presas = Lobe.getPresas();
+        } else {
+            System.out.println("Animal inválido");
+        }
+
+        if (predadores != null && presas != null) {
+            System.out.println("Predadores: " + predadores);
+            System.out.println("Presas: " + presas);
+        }
+
     }
 
     private static void reiniciarExecucao() {

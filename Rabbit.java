@@ -117,19 +117,19 @@ public class Rabbit extends Animal {
         return age >= BREEDING_AGE;
     }
 
-    public String getPredadores() {
-        return "Raposa e lobo";
-    }
-
-    public String getPresas() {
-        return "Ninguém";
-    }
-
     public double getBreed() {
         return this.BREEDING_PROBABILITY;
     }
 
     public void setBreed(double novo) {
         this.BREEDING_PROBABILITY = novo;
+    }
+
+    public static String getPredadores() {
+        return "Raposa e lobo";
+    }
+
+    public static String getPresas() {
+        return "Ninguém";
     }
 }

@@ -51,13 +51,13 @@ public class Lobe extends Animal {
      * rabbits. In the process, it might breed, die of hunger,
      * or die of old age.
      *
-     * @param newFoxes A list to add newly born foxes to.
+     * @param newWolves A list to add newly born foxes to.
      */
-    public void act(List<Animal> newFoxes) {
+    public void act(List<Animal> newWolves) {
         incrementAge();
         incrementHunger();
         if (isAlive()) {
-            giveBirth(newFoxes);
+            giveBirth(newWolves);
             // Move towards a source of food if found.
             Location location = getLocation();
             Location newLocation = findFood();
@@ -167,27 +167,11 @@ public class Lobe extends Animal {
         return age >= BREEDING_AGE;
     }
 
-    public String getPredadores() {
-        return "Ninguém";
+    public static String getPredadores() {
+        return "Nenhum";
     }
 
-    public String getPresas() {
+    public static String getPresas() {
         return "Raposa e coelho";
-    }
-
-    public double getBreed() {
-        return this.BREEDING_PROBABILITY;
-    }
-
-    public void setBreed(double novo) {
-        this.BREEDING_PROBABILITY = novo;
-    }
-
-    public int getFood() {
-        return this.RABBIT_OR_FOX_FOOD_VALUE;
-    }
-
-    public void setFood(int novo) {
-        this.RABBIT_OR_FOX_FOOD_VALUE = novo;
     }
 }
