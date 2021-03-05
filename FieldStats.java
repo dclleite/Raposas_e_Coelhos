@@ -26,7 +26,7 @@ public class FieldStats {
     }
 
     /**
-     * @return Uma string que descreve quais animais estão no campo.
+     * @return Uma String que descreve quais animais estão no campo.
      */
     public String getPopulationDetails(Field field) {
         StringBuffer buffer = new StringBuffer();
@@ -80,7 +80,7 @@ public class FieldStats {
      * Determine se a simulação ainda é viável.
      * Ou seja, deve continuar a funcionar.
      *
-     * @return true Se houver mais de uma espécie viva.
+     * @return Verdadeiro, se houver mais de uma espécie viva.
      */
     public boolean isViable(Field field) {
         // Quantas contagens são diferentes de zero.

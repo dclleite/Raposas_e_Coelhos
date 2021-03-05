@@ -28,17 +28,17 @@ public abstract class Animal {
 
 
     /**
-     * Make this animal act - that is: make it do
-     * whatever it wants/needs to do.
+     * Faça este animal agir - isto é: faça-o agir 
+     * o que quer / precisa fazer.
      *
-     * @param newAnimals A list to add newly born animals to.
+     * @param newAnimals Uma lista para adicionar animais recém-nascidos.
      */
     abstract public void act(List<Animal> newAnimals);
 
     /**
-     * Check whether the animal is alive or not.
+     * Verifique se o animal está vivo ou não. 
      *
-     * @return true if the animal is still alive.
+     * @return Verdadeiro, se o animal ainda estiver vivo. 
      */
     public boolean isAlive() {
         return alive;
@@ -46,8 +46,8 @@ public abstract class Animal {
 
 
     /**
-     * Indicate that the animal is no longer alive.
-     * It is removed from the field.
+     * Indique que o animal não está mais vivo.
+     * Ele é removido do campo. 
      */
     public void setDead() {
         alive = false;
@@ -59,18 +59,18 @@ public abstract class Animal {
     }
 
     /**
-     * Return the animal's location.
+     * Retorne a localização do animal.
      *
-     * @return The animal's location.
+     * @return A localização do animal.
      */
     public Location getLocation() {
         return location;
     }
 
     /**
-     * Place the animal at the new location in the given field.
+     * Coloque o animal no novo local no campo determinado.
      *
-     * @param newLocation The animal's new location.
+     * @param newLocation A nova localização do animal.
      */
     public void setLocation(Location newLocation) {
         if (location != null) {
@@ -81,9 +81,9 @@ public abstract class Animal {
     }
 
     /**
-     * Return the animal's field.
+     * Retorne ao campo do animal.
      *
-     * @return The animal's field.
+     * @return O campo do animal.
      */
     public Field getField() {
         return field;

@@ -26,13 +26,13 @@ public class Simulator {
     //A probabilidade de que um lobo seja criada em qualquer posição da grade.
     private static final double LOBE_CREATION_PROBABILITY = 0.01;
 
-    // List of animals in the field.
+    // Lista de animais no campo.
     private List<Animal> animals;
-    // The current state of the field.
+    // O estado atual do campo.
     private Field field;
-    // The current step of the simulation.
+    // A etapa atual da simulação.
     private int step;
-    // A graphical view of the simulation.
+    // Uma visão gráfica da simulação.
     private SimulatorView view;
 
     /**
@@ -59,13 +59,13 @@ public class Simulator {
         animals = new ArrayList<Animal>();
         field = new Field(depth, width);
 
-        // Create a view of the state of each location in the field.
+        // Crie uma visualização do estado de cada local no campo.
         view = new SimulatorView(depth, width);
         view.setColor(Rabbit.class, Color.green);
         view.setColor(Fox.class, Color.red);
         view.setColor(Lobe.class, Color.blue);
 
-        // Setup a valid starting point.
+        // Configure um ponto de partida válido.
         reset();
     }
 
@@ -95,9 +95,9 @@ public class Simulator {
     public void simulateOneStep() {
         step++;
 
-        // Provide space for newborn animals.
+        // Fornece espaço para animais recém-nascidos.
         List<Animal> newAnimals = new ArrayList<Animal>();
-        // Let all rabbits act.
+        // Deixe todos os coelhos agirem.
         for (Iterator<Animal> it = animals.iterator(); it.hasNext(); ) {
             Animal animal = it.next();
             animal.act(newAnimals);
@@ -106,7 +106,7 @@ public class Simulator {
             }
         }
 
-        // Add the newly born foxes and rabbits to the main lists.
+        // Adicione as raposas e os coelhos recém-nascidos às listas principais.
         animals.addAll(newAnimals);
 
         view.showStatus(step, field);
@@ -120,7 +120,7 @@ public class Simulator {
         animals.clear();
         populate();
 
-        // Show the starting state in the view.
+        // Mostra o estado inicial na vista.
         view.showStatus(step, field);
     }
 

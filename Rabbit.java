@@ -28,12 +28,12 @@ public class Rabbit extends Animal {
     private int age;
 
     /**
-     * Create a new rabbit. A rabbit may be created with age
-     * zero (a new born) or with a random age.
+     * Crie um novo coelho. Um coelho pode ser criado com a idade
+     * zero (um recém-nascido) ou com uma idade aleatória.
      *
-     * @param randomAge If true, the rabbit will have a random age.
-     * @param field     The field currently occupied.
-     * @param location  The location within the field.
+     * @param randomAge Se for verdade, o coelho terá uma idade aleatória.
+     * @param field     O campo atualmente ocupado.
+     * @param location  A localização dentro do campo.
      */
     public Rabbit(boolean randomAge, Field field, Location location) {
         super(field, location);
@@ -44,29 +44,29 @@ public class Rabbit extends Animal {
     }
 
     /**
-     * This is what the rabbit does most of the time - it runs
-     * around. Sometimes it will breed or die of old age.
+     * Isso é o que o coelho faz na maioria das vezes - ele corre
+     * por aí. Às vezes, ele se reproduz ou morre de velhice.
      *
-     * @param newRabbits A list to add newly born rabbits to.
+     * @param newRabbits Uma lista para adicionar coelhos recém-nascidos.
      */
     public void act(List<Animal> newRabbits) {
         incrementAge();
         if (isAlive()) {
             giveBirth(newRabbits);
-            // Try to move into a free location.
+            // Tente mudar para um local livre.
             Location newLocation = getField().freeAdjacentLocation(getLocation());
             if (newLocation != null) {
                 setLocation(newLocation);
             } else {
-                // Overcrowding.
+                // Superlotação.
                 setDead();
             }
         }
     }
 
     /**
-     * Increase the age.
-     * This could result in the rabbit's death.
+     * Aumente a idade.
+     * Isso pode resultar na morte do coelho.
      */
     private void incrementAge() {
         age++;
@@ -76,14 +76,14 @@ public class Rabbit extends Animal {
     }
 
     /**
-     * Check whether or not this rabbit is to give birth at this step.
-     * New births will be made into free adjacent locations.
+     * Verifique se este coelho vai dar à luz ou não nesta etapa.
+     * Os novos nascimentos serão feitos em locais adjacentes livres.
      *
-     * @param newRabbits A list to add newly born rabbits to.
+     * @param newRabbits Uma lista para adicionar coelhos recém-nascidos. 
      */
     private void giveBirth(List<Animal> newRabbits) {
-        // New rabbits are born into adjacent locations.
-        // Get a list of adjacent free locations.
+        // Novos coelhos nascem em locais adjacentes.
+        // Obtenha uma lista de locais gratuitos adjacentes. 
         Field field = getField();
         List<Location> free = field.getFreeAdjacentLocations(getLocation());
         int births = breed();
@@ -95,10 +95,10 @@ public class Rabbit extends Animal {
     }
 
     /**
-     * Generate a number representing the number of births,
-     * if it can breed.
+     * Gere um número que representa o número de nascimentos,
+     * se pode procriar.
      *
-     * @return The number of births (may be zero).
+     * @return O número de nascimentos (pode ser zero). 
      */
     private int breed() {
         int births = 0;
@@ -109,9 +109,9 @@ public class Rabbit extends Animal {
     }
 
     /**
-     * A rabbit can breed if it has reached the breeding age.
+     * Um coelho pode procriar se tiver atingido a idade reprodutiva.
      *
-     * @return true if the rabbit can breed, false otherwise.
+     * @return Verdadeiro, se o coelho pode procriar, caso contrário, falso.
      */
     private boolean canBreed() {
         return age >= BREEDING_AGE;

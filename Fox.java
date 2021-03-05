@@ -37,9 +37,9 @@ public class Fox extends Animal {
      * Crie uma raposa. Uma raposa pode ser criada como um recém-nascido (idade zero
      * e sem fome) ou com idade aleatória.
      *
-     * @param randomAge If true, the fox will have random age and hunger level.
-     * @param field     The field currently occupied.
-     * @param location  The location within the field.
+     * @param randomAge Se for verdade, a raposa terá idade e nível de fome aleatórios.
+     * @param field     O campo atualmente ocupado.
+     * @param location  A localização dentro do campo. 
      */
     public Fox(boolean randomAge, Field field, Location location) {
         super(field, location);
@@ -54,36 +54,36 @@ public class Fox extends Animal {
     }
 
     /**
-     * This is what the fox does most of the time: it hunts for
-     * rabbits. In the process, it might breed, die of hunger,
-     * or die of old age.
+     * Isso é o que a raposa faz na maioria das vezes: ela caça por
+     * coelhos. No processo, ele pode se reproduzir, morrer de fome,
+     * ou morrer de velhice.
      *
-     * @param newFoxes A list to add newly born foxes to.
+     * @param newFoxes Uma lista para adicionar raposas recém-nascidas.
      */
     public void act(List<Animal> newFoxes) {
         incrementAge();
         incrementHunger();
         if (isAlive()) {
             giveBirth(newFoxes);
-            // Move towards a source of food if found.
+            // Mova-se em direção a uma fonte de alimento, se encontrada.
             Location location = getLocation();
             Location newLocation = findFood();
             if (newLocation == null) {
-                // No food found - try to move to a free location.
+                // Nenhum alimento foi encontrado - tente ir para um local livre.
                 newLocation = getField().freeAdjacentLocation(location);
             }
-            // See if it was possible to move.
+            // Veja se dava para se mexer.
             if (newLocation != null) {
                 setLocation(newLocation);
             } else {
-                // Overcrowding.
+                // Superlotação.
                 setDead();
             }
         }
     }
 
     /**
-     * Increase the age. This could result in the fox's death.
+     * Aumente a idade. Isso pode resultar na morte da raposa.
      */
     private void incrementAge() {
         age++;
@@ -93,7 +93,7 @@ public class Fox extends Animal {
     }
 
     /**
-     * Make this fox more hungry. This could result in the fox's death.
+     * Deixe esta raposa com mais fome. Isso pode resultar na morte da raposa.
      */
     private void incrementHunger() {
         foodLevel--;
@@ -103,10 +103,10 @@ public class Fox extends Animal {
     }
 
     /**
-     * Tell the fox to look for rabbits adjacent to its current location.
-     * Only the first live rabbit is eaten.
+     * Diga à raposa para procurar coelhos próximos à sua localização atual.
+     * Apenas o primeiro coelho vivo é comido.
      *
-     * @return Where food was found, or null if it wasn't.
+     * @return Onde a comida foi encontrada, ou null se não for.
      */
     private Location findFood() {
         Field field = getField();
@@ -120,7 +120,7 @@ public class Fox extends Animal {
                 if (rabbit.isAlive()) {
                     rabbit.setDead();
                     foodLevel = RABBIT_FOOD_VALUE;
-                    // Remove the dead rabbit from the field.
+                    // Remova o coelho morto do campo.
                     return where;
                 }
             }
@@ -129,14 +129,14 @@ public class Fox extends Animal {
     }
 
     /**
-     * Check whether or not this fox is to give birth at this step.
-     * New births will be made into free adjacent locations.
+     * Verifique se esta raposa dará à luz ou não nesta etapa.
+     * Os novos nascimentos serão feitos em locais adjacentes livres.
      *
-     * @param newFoxes A list to add newly born foxes to.
+     * @param newFoxes Uma lista para adicionar raposas recém-nascidas.
      */
     private void giveBirth(List<Animal> newFoxes) {
-        // New foxes are born into adjacent locations.
-        // Get a list of adjacent free locations.
+        // Novas raposas nascem em locais adjacentes.
+        // Obtenha uma lista de locais gratuitos adjacentes.
         Field field = getField();
         List<Location> free = field.getFreeAdjacentLocations(getLocation());
         int births = breed();
@@ -148,10 +148,10 @@ public class Fox extends Animal {
     }
 
     /**
-     * Generate a number representing the number of births,
-     * if it can breed.
+     * Gere um número que representa o número de nascimentos,
+     * se pode procriar.
      *
-     * @return The number of births (may be zero).
+     * @return O número de nascimentos (pode ser zero).
      */
     private int breed() {
         int births = 0;
@@ -162,7 +162,7 @@ public class Fox extends Animal {
     }
 
     /**
-     * A fox can breed if it has reached the breeding age.
+     * Uma raposa pode procriar se atingiu a idade reprodutiva.
      */
     private boolean canBreed() {
         return age >= BREEDING_AGE;

@@ -108,7 +108,7 @@ public class SimulatorView extends JFrame {
     /**
      * Determine se a simulação deve continuar em execução.
      *
-     * @return true Se houver mais de uma espécie viva.
+     * @return Verdadeiro, se houver mais de uma espécie viva. 
      */
     public boolean isViable(Field field) {
         return stats.isViable(field);
@@ -153,7 +153,7 @@ public class SimulatorView extends JFrame {
          * pode ser redimensionado, calcule o fator de escala novamente.
          */
         public void preparePaint() {
-            if (!size.equals(getSize())) {  // if the size has changed... // se o tamanho mudou ...
+            if (!size.equals(getSize())) {  // se o tamanho mudou ...
                 size = getSize();
                 fieldImage = fieldView.createImage(size.width, size.height);
                 g = fieldImage.getGraphics();

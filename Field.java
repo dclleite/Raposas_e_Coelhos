@@ -39,9 +39,9 @@ public class Field {
     }
 
     /**
-     * Clear the given location.
+     * Limpe o local fornecido.
      *
-     * @param location The location to clear.
+     * @param location O local a ser limpo. 
      */
     public void clear(Location location) {
         field[location.getRow()][location.getCol()] = null;
@@ -94,13 +94,13 @@ public class Field {
     }
 
     /**
-     * Generate a random location that is adjacent to the
-     * given location, or is the same location.
-     * The returned location will be within the valid bounds
-     * of the field.
+     * Gere um local aleatório adjacente ao
+     * determinado local ou é o mesmo local.
+     * O local retornado estará dentro dos limites válidos
+     * do campo. 
      *
-     * @param location The location from which to generate an adjacency.
-     * @return A valid location within the grid area.
+     * @param location O local a partir do qual gerar uma adjacência.
+     * @return Um local válido dentro da área da grade.
      */
     public Location randomAdjacentLocation(Location location) {
         List<Location> adjacent = adjacentLocations(location);
@@ -108,10 +108,10 @@ public class Field {
     }
 
     /**
-     * Get a shuffled list of the free adjacent locations.
+     * Obtenha uma lista aleatória dos locais adjacentes gratuitos.
      *
-     * @param location Get locations adjacent to this.
-     * @return A list of free adjacent locations.
+     * @param location Obtenha locais adjacentes a este.
+     * @return Uma lista de locais adjacentes livres.
      */
     public List<Location> getFreeAdjacentLocations(Location location) {
         List<Location> free = new LinkedList<Location>();
@@ -125,13 +125,13 @@ public class Field {
     }
 
     /**
-     * Try to find a free location that is adjacent to the
-     * given location. If there is none, return null.
-     * The returned location will be within the valid bounds
-     * of the field.
+     * Tente encontrar um local gratuito adjacente a
+     * determinado local. Se não houver nenhum, retorna nulo
+     * O local retornado estará dentro dos limites válido
+     * do campo.
      *
-     * @param location The location from which to generate an adjacency.
-     * @return A valid location within the grid area.
+     * @param location A localização a partir da qual uma adjacência deve ser gerada.
+     * @return Um local válido dentro da área da grade. 
      */
     public Location freeAdjacentLocation(Location location) {
         // The available free ones.
@@ -144,16 +144,16 @@ public class Field {
     }
 
     /**
-     * Return a shuffled list of locations adjacent to the given one.
-     * The list will not include the location itself.
-     * All locations will lie within the grid.
+     * Retorne uma lista embaralhada de locais adjacentes ao determinado.
+     * A lista não incluirá o local em si.
+     * Todos os locais ficarão dentro da grade. 
      *
-     * @param location The location from which to generate adjacencies.
-     * @return A list of locations adjacent to that given.
+     * @param location A localização a partir da qual gerar adjacências.
+     * @return Uma lista de locais adjacentes àquele fornecido.
      */
     public List<Location> adjacentLocations(Location location) {
         assert location != null : "Null location passed to adjacentLocations";
-        // The list of locations to be returned.
+        // A lista de locais a serem retornados. 
         List<Location> locations = new LinkedList<Location>();
         if (location != null) {
             int row = location.getRow();
@@ -163,7 +163,7 @@ public class Field {
                 if (nextRow >= 0 && nextRow < depth) {
                     for (int coffset = -1; coffset <= 1; coffset++) {
                         int nextCol = col + coffset;
-                        // Exclude invalid locations and the original location.
+                        // Exclua locais inválidos e o local original. 
                         if (nextCol >= 0 && nextCol < width && (roffset != 0 || coffset != 0)) {
                             locations.add(new Location(nextRow, nextCol));
                         }
@@ -171,8 +171,8 @@ public class Field {
                 }
             }
 
-            // Shuffle the list. Several other methods rely on the list
-            // being in a random order.
+            // Misture a lista. Vários outros métodos dependem da lista
+            // estando em uma ordem aleatória.
             Collections.shuffle(locations, rand);
         }
         return locations;
