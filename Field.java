@@ -134,7 +134,7 @@ public class Field {
      * @return Um local válido dentro da área da grade. 
      */
     public Location freeAdjacentLocation(Location location) {
-        // The available free ones.
+        // Os gratuitos disponíveis. 
         List<Location> free = getFreeAdjacentLocations(location);
         if (free.size() > 0) {
             return free.get(0);
